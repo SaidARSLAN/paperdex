@@ -11,9 +11,7 @@ from llama_index.llms.groq import Groq
 
 from paperdex.settings import settings
 
-LlamaSettings.embed_model = HuggingFaceEmbedding(
-    model_name=settings.embedding_model
-)
+LlamaSettings.embed_model = HuggingFaceEmbedding(model_name=settings.embedding_model)
 LlamaSettings.llm = Groq(
     model=settings.groq_model,
     api_key=settings.groq_api_key,

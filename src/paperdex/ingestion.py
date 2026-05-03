@@ -13,23 +13,15 @@ class Ingestor:
         self._chroma_collection = self._chroma_client.get_or_create_collection(
             settings.chroma_collection
         )
-        self._vector_store = ChromaVectorStore(
-            chroma_collection=self._chroma_collection
-        )
-        self._storage_context = StorageContext.from_defaults(
-            vector_store=self._vector_store
-        )
+        self._vector_store = ChromaVectorStore(chroma_collection=self._chroma_collection)
+        self._storage_context = StorageContext.from_defaults(vector_store=self._vector_store)
 
     def ingest_directory(self, data_dir: str) -> int:
         try:
-            documents = SimpleDirectoryReader(
-                input_dir=data_dir, exclude_hidden=False
-            ).load_data()
+            documents = SimpleDirectoryReader(input_dir=data_dir, exclude_hidden=False).load_data()
             if len(documents) == 0:
                 raise EmptyDocumentError("No readable documents found in directory")
-            VectorStoreIndex.from_documents(
-                documents, storage_context=self._storage_context
-            )
+            VectorStoreIndex.from_documents(documents, storage_context=self._storage_context)
 
             return self._chroma_collection.count()
         except PaperdexError:

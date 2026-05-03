@@ -15,11 +15,11 @@ class Generator:
             if len(chunks) == 0:
                 raise GenerationError("No context found, cannot answer question.")
 
-            context = "\n\n".join(
-                f"[Source {i}] {s.text}" for i, s in enumerate(chunks, start=1)
-            )
+            context = "\n\n".join(f"[Source {i}] {s.text}" for i, s in enumerate(chunks, start=1))
 
-            prompt = f"""Answer the question based on the context below. If the context does not contain the answer, say 'I don't know'. Reply in the same language as the question.
+            prompt = f"""Answer the question based on the context below.
+If the context does not contain the answer, say 'I don't know'.
+Reply in the same language as the question.
 
 Context:
 {context}

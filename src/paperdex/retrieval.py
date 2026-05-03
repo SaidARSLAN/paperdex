@@ -13,9 +13,7 @@ class Retriever:
         self._chroma_collection = self._chroma_client.get_or_create_collection(
             settings.chroma_collection
         )
-        self._vector_store = ChromaVectorStore(
-            chroma_collection=self._chroma_collection
-        )
+        self._vector_store = ChromaVectorStore(chroma_collection=self._chroma_collection)
 
         self._index = VectorStoreIndex.from_vector_store(self._vector_store)
 

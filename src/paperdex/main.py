@@ -76,9 +76,7 @@ def root() -> dict[str, str]:
 
 @app.post("/query")
 def query_endpoint(request: QueryRequest) -> QueryResponse:
-    logger.info(
-        f"query received: {request.question[:50]!r} top_k={request.top_k}"
-    )
+    logger.info(f"query received: {request.question[:50]!r} top_k={request.top_k}")
     response = generator.answer(request.question, top_k=request.top_k)
     logger.info(f"query answered: {len(response.sources)} sources")
     return response
