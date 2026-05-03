@@ -1,18 +1,18 @@
 class PaperdexError(Exception):
-    """Paperdex projesinin tüm hatalarının ortak atası."""
+    """Base class for all Paperdex-specific errors."""
 
 
 class IngestError(PaperdexError):
-    """PDF parse, chunking veya embedding sırasında hata."""
+    """Error during PDF parse, chunking, or embedding."""
 
 
 class EmptyDocumentError(IngestError):
-    """Doküman açıldı ama metin içermiyor (boş veya yalnızca resim)."""
+    """Document opened but contains no extractable text (empty or image-only)."""
 
 
 class RetrievalError(PaperdexError):
-    """Vector store'da arama sırasında hata."""
+    """Error while searching the vector store."""
 
 
 class GenerationError(PaperdexError):
-    """LLM çağrısı sırasında hata (Groq down, rate limit, timeout)."""
+    """Error during LLM call (Groq down, rate limit, timeout)."""

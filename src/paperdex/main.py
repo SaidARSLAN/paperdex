@@ -66,7 +66,7 @@ async def paperdex_handler(request: Request, exc: PaperdexError) -> JSONResponse
 @app.exception_handler(Exception)
 async def generic_handler(request: Request, exc: Exception) -> JSONResponse:
     logger.error(f"Unexpected error: {exc}", exc_info=True)
-    return JSONResponse(status_code=500, content={"detail": "Beklenmeyen hata"})
+    return JSONResponse(status_code=500, content={"detail": "Unexpected error"})
 
 
 @app.get("/")

@@ -13,19 +13,19 @@ class Generator:
         try:
             chunks = self._retriever.retrieve(question=question, top_k=top_k)
             if len(chunks) == 0:
-                raise GenerationError("Bağlam bulunamadı, sorulara cevap verilemiyor.")
+                raise GenerationError("No context found, cannot answer question.")
 
             context = "\n\n".join(
-                f"[Kaynak {i}] {s.text}" for i, s in enumerate(chunks, start=1)
+                f"[Source {i}] {s.text}" for i, s in enumerate(chunks, start=1)
             )
 
-            prompt = f"""Aşağıdaki bağlama dayanarak soruyu cevapla. Bağlam dışında bilgi varsa 'Bilmiyorum' de. Türkçe cevap ver.
+            prompt = f"""Answer the question based on the context below. If the context does not contain the answer, say 'I don't know'. Reply in the same language as the question.
 
-Bağlam:
+Context:
 {context}
 
-Soru: {question}
-Cevap:"""
+Question: {question}
+Answer:"""
 
             response = LlamaSettings.llm.complete(prompt)
             answer_text = str(response).strip()
@@ -34,4 +34,4 @@ Cevap:"""
         except PaperdexError:
             raise
         except Exception as e:
-            raise GenerationError(f"Generation hatası: {e}") from e
+            raise GenerationError(f"Generation error: {e}") from e

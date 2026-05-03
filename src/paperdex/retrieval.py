@@ -36,4 +36,4 @@ class Retriever:
         except PaperdexError:
             raise
         except Exception as e:
-            raise RetrievalError(f"Retrieve Hatası : {e}") from e
+            raise RetrievalError(f"Retrieve error: {e}") from e

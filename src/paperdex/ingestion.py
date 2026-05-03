@@ -26,7 +26,7 @@ class Ingestor:
                 input_dir=data_dir, exclude_hidden=False
             ).load_data()
             if len(documents) == 0:
-                raise EmptyDocumentError("Klasörde okunabilir doküman yok")
+                raise EmptyDocumentError("No readable documents found in directory")
             VectorStoreIndex.from_documents(
                 documents, storage_context=self._storage_context
             )
@@ -35,4 +35,4 @@ class Ingestor:
         except PaperdexError:
             raise
         except Exception as e:
-            raise IngestError(f"Ingest hatası: {e}") from e
+            raise IngestError(f"Ingest error: {e}") from e

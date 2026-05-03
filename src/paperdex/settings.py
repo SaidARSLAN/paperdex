@@ -25,7 +25,7 @@ class Settings(BaseSettings):
     @field_validator("chroma_path")
     @classmethod
     def resolve_chroma_path(cls, v: str) -> str:
-        """Göreli path'i proje köküne göre mutlak hâle getir."""
+        """Resolve relative path against the project root to make it absolute."""
         path = Path(v)
         if path.is_absolute():
             return str(path)

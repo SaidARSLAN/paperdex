@@ -1,8 +1,8 @@
 """Paperdex package — global LlamaIndex setup.
 
-Module import edildiğinde global Settings.embed_model ve Settings.llm
-bir kez yapılandırılır. Tüm modüller (ingestion, retrieval, generation)
-aynı config'i paylaşır.
+When the module is imported, the global Settings.embed_model and Settings.llm
+are configured once. All modules (ingestion, retrieval, generation) share
+the same configuration.
 """
 
 from llama_index.core import Settings as LlamaSettings
