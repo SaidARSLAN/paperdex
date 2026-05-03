@@ -3,7 +3,7 @@ class PaperdexError(Exception):
 
 
 class IngestError(PaperdexError):
-    """Doküman ingest sırasında hata (PDF parse, chunking, embedding)."""
+    """PDF parse, chunking veya embedding sırasında hata."""
 
 
 class EmptyDocumentError(IngestError):
@@ -11,8 +11,8 @@ class EmptyDocumentError(IngestError):
 
 
 class RetrievalError(PaperdexError):
-    """Vector store'da arama sırasında hata (ChromaDB erişimi vs)."""
+    """Vector store'da arama sırasında hata."""
 
 
 class GenerationError(PaperdexError):
-    """LLM çağrısı sırasında hata (Groq API down, rate limit, timeout)."""
+    """LLM çağrısı sırasında hata (Groq down, rate limit, timeout)."""
