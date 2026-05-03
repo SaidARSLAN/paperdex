@@ -1,8 +1,10 @@
 from pathlib import Path
 
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-ENV_PATH = Path(__file__).parent.parent.parent / ".env"
+PROJECT_ROOT = Path(__file__).parent.parent.parent
+ENV_PATH = PROJECT_ROOT / ".env"
 
 
 class Settings(BaseSettings):
@@ -19,6 +21,15 @@ class Settings(BaseSettings):
     chunk_size: int
     chunk_overlap: int
     top_k: int
+
+    @field_validator("chroma_path")
+    @classmethod
+    def resolve_chroma_path(cls, v: str) -> str:
+        """Göreli path'i proje köküne göre mutlak hâle getir."""
+        path = Path(v)
+        if path.is_absolute():
+            return str(path)
+        return str(PROJECT_ROOT / path)
 
 
 settings = Settings()  # type: ignore[call-arg]
